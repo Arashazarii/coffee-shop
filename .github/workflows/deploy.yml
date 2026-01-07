@@ -1,4 +1,4 @@
-name: Build Tailwind CSS
+name: Build Tailwind CSS for GH Pages
 
 on:
   push:
@@ -35,6 +35,6 @@ jobs:
       - name: Build Tailwind CSS
         run: npx @tailwindcss/cli -i ./src/input.css -o ./public/styles/main.css --minify
 
-      # 6️⃣ Optional: list files for verification
-      - name: List files
+      # 6️⃣ Optional: verify files
+      - name: List public folder
         run: ls -Rlh public

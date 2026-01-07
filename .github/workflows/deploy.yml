@@ -29,6 +29,7 @@ jobs:
 
       - name: Build Tailwind CSS
         run: |
+          mkdir -p public/styles
           npx tailwindcss \
             -i ./public/input.css \
             -o ./public/styles/main.css

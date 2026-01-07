@@ -27,14 +27,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ Create public/styles folder
-      - name: Create output folder
+      # 4️⃣ Ensure output folder exists
+      - name: Create public/styles folder
         run: mkdir -p public/styles
 
-      # 5️⃣ Build Tailwind CSS
+      # 5️⃣ Build Tailwind CSS from src/input.css to public/styles/main.css
       - name: Build Tailwind CSS
         run: npx @tailwindcss/cli -i ./src/input.css -o ./public/styles/main.css --minify
 
-      # 6️⃣ Optional: show filesize
-      - name: Show CSS file size
-        run: ls -lh public/styles/main.css
+      # 6️⃣ Optional: list files for verification
+      - name: List files
+        run: ls -Rlh public

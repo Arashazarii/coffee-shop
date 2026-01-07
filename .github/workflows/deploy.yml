@@ -1,46 +1,40 @@
-name: Build & Deploy Tailwind to GitHub Pages
+name: Build Tailwind CSS
 
 on:
   push:
     branches:
       - main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build-deploy:
+  build-css:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # 1️⃣ Checkout repository
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
+      # 2️⃣ Setup Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Create public/styles folder
+      - name: Create output folder
+        run: mkdir -p public/styles
+
+      # 5️⃣ Build Tailwind CSS
       - name: Build Tailwind CSS
-        run: |
-          mkdir -p public/styles
-          npx tailwindcss@latest \
-            -i ./public/input.css \
-            -o ./public/styles/main.css
+        run: npx @tailwindcss/cli -i ./src/input.css -o ./public/styles/main.css --minify
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      # 6️⃣ Optional: show filesize
+      - name: Show CSS file size
+        run: ls -lh public/styles/main.css

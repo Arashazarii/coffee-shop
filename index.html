@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="rtl">
   <head>
     <meta charset="UTF-8" />
@@ -12,7 +12,7 @@
         "dark",
         localStorage.theme === "dark" ||
           (!("theme" in localStorage) &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
+            window.matchMedia("(prefers-color-scheme: dark)").matches),
       );
       // // Whenever the user explicitly chooses light mode
       // localStorage.theme = "light";
@@ -303,6 +303,7 @@
       </symbol>
     </svg>
 
+    <!-- Desktop -->
     <header
       class="fixed top-9 right-0 left-0 hidden md:flex items-center bg-black/50 w-[98%] lg:w-[90%] h-24 px-5 lg:px-10 py-5 mx-auto rounded-3xl backdrop-blur-[6px]"
     >
@@ -398,7 +399,7 @@
                       <div>
                         <span
                           class="text-teal-600 dark:text-emerald-500 text-xs tracking-tighter"
-                          >14.500 تومان تخفیف</span
+                          >14,500 تومان تخفیف</span
                         >
                         <div
                           class="text-zinc-700 dark:text-white font-dana-demibold"
@@ -481,11 +482,12 @@
       </div>
     </header>
 
+    <!-- Mobile -->
     <div
       class="flex md:hidden items-center justify-between h-16 px-4 bg-white dark:bg-zinc-700"
     >
       <!-- Nav Icon -->
-      <div>
+      <div class="nav-icon">
         <svg class="size-8 text-zinc-700 dark:text-white cursor-pointer">
           <use href="#bars-3"></use>
         </svg>
@@ -493,7 +495,7 @@
 
       <!-- Nav-->
       <div
-        class="fixed top-0 bottom-0 right-0 w-64 min-h-screen pt-3 px-4 bg-white dark:bg-zinc-700 z-20"
+        class="nav fixed top-0 bottom-0 -right-64 w-64 min-h-screen pt-3 px-4 bg-white dark:bg-zinc-700 z-20 transition-all overflow-y-auto"
       >
         <!-- Nav Header-->
         <div
@@ -507,9 +509,11 @@
               <use href="#logo-type"></use>
             </svg>
           </div>
-          <svg class="size-5 text-zinc-600 dark:text-white cursor-pointer">
-            <use href="#x-mark"></use>
-          </svg>
+          <div class="nav-close-btn">
+            <svg class="size-5 text-zinc-600 dark:text-white cursor-pointer">
+              <use href="#x-mark"></use>
+            </svg>
+          </div>
         </div>
 
         <!-- Nav Menu-->
@@ -526,18 +530,28 @@
         </div>
 
         <ul class="*:pr-2.5 space-y-6 text-zinc-600 dark:text-white">
-          <li class="flex items-center justify-between">
-            <a href="#" class="flex items-center gap-x-2">
-              <svg class="size-5">
-                <use href="#shopping-bag"></use>
-              </svg>
-              فروشگاه
-            </a>
-            <span>
-              <svg class="size-4">
-                <use href="#chevron-down"></use>
-              </svg>
-            </span>
+          <li>
+            <div class="flex items-center justify-between">
+              <a href="#" class="flex items-center gap-x-2">
+                <svg class="size-5">
+                  <use href="#shopping-bag"></use>
+                </svg>
+                فروشگاه
+              </a>
+              <span class="submenu-open-btn">
+                <svg class="size-4 cursor-pointer">
+                  <use href="#chevron-down"></use>
+                </svg>
+              </span>
+            </div>
+            <div class="submenu">
+              <a href="#">قهوه ویژه</a>
+              <a href="#" class="submenu__item--active">ویژه در سطح جهانی</a>
+              <a href="#">قهوه درجه یک</a>
+              <a href="#">ترکیبات تجاری</a>
+              <a href="#">کپسول قهوه</a>
+              <a href="#">قهوه زینو برزیلی</a>
+            </div>
           </li>
           <li>
             <a href="#" class="flex items-center gap-x-2">
@@ -574,7 +588,7 @@
         </ul>
         <!-- Nav Footer-->
         <div
-          class="flex flex-col items-start gap-y-6 pt-8 px-2.5 mt-8 border-t border-t-gray-100 dark:border-t-white/10 text-orange-300"
+          class="flex flex-col items-start gap-y-6 py-8 px-2.5 mt-8 border-t border-t-gray-100 dark:border-t-white/10 text-orange-300"
         >
           <a href="#" class="inline-flex items-center gap-x-2 cursor-pointer">
             <svg class="size-5">
@@ -617,16 +631,106 @@
         </svg>
       </div>
       <!-- Cart Icon -->
-      <div>
+      <div class="cart-icon">
         <svg class="size-8 text-zinc-700 dark:text-white cursor-pointer">
           <use href="#shopping-cart"></use>
         </svg>
       </div>
+
+      <!-- Cart-->
+      <div
+        class="cart fixed top-0 bottom-0 -left-64 flex flex-col w-64 min-h-screen pt-5 px-4 bg-white dark:bg-zinc-700 z-20 transition-all overflow-y-auto"
+      >
+        <!-- Cart Header-->
+        <div
+          class="flex items-center justify-between pb-5 mb-5 border-b border-b-gray-300 dark:border-b-white/10"
+        >
+          <div class="cart-close-btn">
+            <svg class="size-5 text-zinc-600 dark:text-white cursor-pointer">
+              <use href="#x-mark"></use>
+            </svg>
+          </div>
+          <span class="text-zinc-700 dark:text-white font-dana-medium"
+            >سبد خرید</span
+          >
+        </div>
+
+        <!-- Cart Body-->
+        <div class="*:pb-5 *:mb-5 *:border-b">
+          <div class="flex gap-x-1 border-b-gray-100 dark:border-b-white/10">
+            <img
+              src="./public/images/products/p1.png"
+              class="size-22.5"
+              alt="Product 1"
+            />
+            <div class="flex flex-col justify-between">
+              <h4
+                class="font-dana-medium text-zinc-700 dark:text-white text-sm line-clamp-2 py-1.5"
+              >
+                قهوه اسپرسو بن مانو مدل پریسکا 250 گرمی
+              </h4>
+              <div>
+                <span
+                  class="text-teal-600 dark:text-emerald-500 font-dana-medium text-xs tracking-tighter"
+                  >14,500 تومان تخفیف</span
+                >
+                <div class="text-zinc-700 dark:text-white font-dana-demibold">
+                  175,000
+                  <span class="font-dana-regular text-xs">تومان</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-x-1 border-b-gray-100 dark:border-b-white/10">
+            <img
+              src="./public/images/products/p2.png"
+              class="size-22.5"
+              alt="Product 1"
+            />
+            <div class="flex flex-col justify-between">
+              <h4
+                class="font-dana-medium text-zinc-700 dark:text-white text-sm line-clamp-2 py-1.5"
+              >
+                قهوه اسپرسو بن مانو مدل پریسکا 250 گرمی
+              </h4>
+              <div>
+                <span
+                  class="text-teal-600 dark:text-emerald-500 font-dana-medium text-xs tracking-tighter"
+                  >25,500 تومان تخفیف</span
+                >
+                <div class="text-zinc-700 dark:text-white font-dana-demibold">
+                  250,000
+                  <span class="font-dana-regular text-xs">تومان</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cart Footer-->
+        <div class="flex items-center gap-x-4 mt-auto mb-8">
+          <a
+            href="#"
+            class="flex items-center justify-center h-11 w-28 text-white bg-teal-600 hover:bg-teal-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 rounded-xl transition-all"
+            >ثبت سفارش</a
+          >
+
+          <div>
+            <span
+              class="font-dana-medium text-gray-300 text-xs tracking-tighter"
+              >مبلغ قابل پرداخت</span
+            >
+            <div class="text-zinc-700 dark:text-white font-dana-demibold">
+              425,000
+              <span class="font-dana-regular text-xs">تومان</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div
-      class="overlay md:hidden fixed inset-0 w-full h-full bg-black/40 z-10"
-    ></div>
+    <div class="overlay"></div>
     <script src="./public/scripts/app.js"></script>
   </body>
 </html>

@@ -71,20 +71,38 @@
     font-display: swap;
   }
 
-  body {
+  /* body {
     background-image: url("../images/headerBgDesktop.webp");
     background-repeat: no-repeat;
-  }
+  } */
 }
 
 @utility container {
-  @apply mx-auto px-4 lg:px-2.5;
+  @apply mx-auto px-4 lg:px-2.5 max-w-7xl;
 }
+
+/* @layer utilities {
+  .bg-home-mobile {
+    background-image: url("../images/headerBgMobile.webp");
+  }
+  .bg-home-desktop {
+    background-image: url("../images/headerBgDesktop.webp");
+  }
+} */
 
 @layer utilities {
   .bg-home-mobile {
+    background-image: url("../images/headerBgMobile.webp");
   }
-  .bg-home-desktop {
+
+  @media (min-width: 768px) {
+    .bg-home-desktop {
+      background-image: url("../images/headerBgDesktop.webp");
+    }
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
   }
 }
 
@@ -122,5 +140,84 @@
   }
   .overlay--visible {
     @apply visible opacity-100;
+  }
+
+  .circle {
+    @apply hidden md:flex items-center justify-center border rounded-full;
+  }
+  .circle--main {
+    @apply absolute bottom-0 right-0 left-0 mx-auto translate-y-2/4;
+  }
+  .circle--lg {
+    @apply size-50.75 border-white/25;
+  }
+  .circle--md {
+    @apply size-36.25 border-white/50;
+  }
+  .circle--sm {
+    @apply size-23.75 border-white/80;
+  }
+
+  @media screen and (min-width: 1280px) {
+    html.dark .products {
+      background-image: url("../images/body-bg.png");
+    }
+
+    .products {
+      background:
+        linear-gradient(rgba(243, 244, 246, 0.65), rgba(243, 244, 246, 0.65)),
+        url("../images/body-bg.png");
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+  }
+
+  .section-title {
+    @apply font-morabba-medium text-2xl md:text-5xl text-zinc-700 dark:text-white;
+  }
+  .section-subtitle {
+    @apply inline-block font-morabba-light text-lg md:text-3xl mt-0.5 md:mt-1.5 text-zinc-700 dark:text-white;
+  }
+  .section-link {
+    @apply flex items-center md:gap-x-1 h-10 pr-3 pl-1 text-base md:text-xl tracking-tightest
+     text-orange-300 transition-colors md:hover:bg-orange-300/20  rounded-md;
+  }
+
+  .offer {
+    @apply relative text-gray-400;
+  }
+  .offer::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    inset: 0;
+    top: -2px;
+    margin: auto;
+    background-color: #ef4444;
+  }
+
+  .category-banner__item1 {
+    background:
+      linear-gradient(
+        270deg,
+        rgba(0, 0, 0, 0.6) 33.85%,
+        rgba(243, 244, 246, 0.1) 100%
+      ),
+      url("../images/categories/category-right.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .category-banner__item2 {
+    background:
+      linear-gradient(
+        270deg,
+        rgba(0, 0, 0, 0.6) 33.85%,
+        rgba(243, 244, 246, 0.1) 100%
+      ),
+      url("../images/categories/category-left.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
